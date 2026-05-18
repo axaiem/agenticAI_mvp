@@ -1,0 +1,42 @@
+{
+  "gemini-3.1-flash-lite": {
+    "model_name": "gemini/gemini-3.1-flash-lite",
+    "base_url": null,
+    "capability": "fast",
+    "env_key_name": "GEMINI_API_KEY",
+    "rpm_limit": 16,
+    "rpd_limit": 500
+  },
+  "cerebras-llama-8b": {
+    "model_name": "cerebras/llama3.1-8b",
+    "base_url": null,
+    "capability": "fast",
+    "env_key_name": "CEREBRAS_API_KEY",
+    "rpm_limit": 30,
+    "rpd_limit": 14400
+  },
+  "groq-llama-70b": {
+    "model_name": "groq/llama-3.3-70b-versatile",
+    "base_url": null,
+    "capability": "balanced",
+    "env_key_name": "GROQ_API_KEY",
+    "rpm_limit": 30,
+    "rpd_limit": 1000
+  },
+  "nvidia-llama-70b": {
+    "model_name": "nvidia_nim/meta/llama-3.1-70b-instruct",
+    "base_url": "https://integrate.api.nvidia.com/v1",
+    "capability": "balanced",
+    "env_key_name": "NVIDIA_API_KEY",
+    "rpm_limit": 40,
+    "rpd_limit": 200
+  },
+  "openrouter-claude-sonnet": {
+    "model_name": "anthropic/claude-3.5-sonnet",
+    "base_url": "https://openrouter.ai/api/v1",
+    "capability": "capable",
+    "env_key_name": "OPENROUTER_API_KEY",
+    "rpm_limit": 2,
+    "rpd_limit": 100
+  }
+}

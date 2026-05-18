@@ -1,0 +1,42 @@
+{
+  "gemini-3.1-flash-lite": {
+    "last_request_time": 1779119977.86712,
+    "minute_timestamps": [
+      1779119977.86712
+    ],
+    "today_date": "2026-05-18",
+    "calls_today": 7
+  },
+  "cerebras-llama-8b": {
+    "last_request_time": 1779119979.656225,
+    "minute_timestamps": [
+      1779119979.656225
+    ],
+    "today_date": "2026-05-18",
+    "calls_today": 3
+  },
+  "groq-llama-70b": {
+    "last_request_time": 1779119980.353343,
+    "minute_timestamps": [
+      1779119980.353343
+    ],
+    "today_date": "2026-05-18",
+    "calls_today": 6
+  },
+  "nvidia-llama-70b": {
+    "last_request_time": 1779119980.61569,
+    "minute_timestamps": [
+      1779119980.61569
+    ],
+    "today_date": "2026-05-18",
+    "calls_today": 3
+  },
+  "openrouter-claude-sonnet": {
+    "last_request_time": 1779119981.691245,
+    "minute_timestamps": [
+      1779119981.691245
+    ],
+    "today_date": "2026-05-18",
+    "calls_today": 5
+  }
+}

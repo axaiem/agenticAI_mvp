@@ -1,7 +1,7 @@
 import asyncio
 import os
 from dotenv import load_dotenv
-from llmgateway import GatewayService, GatewayRequest, TaskComplexity
+from src.llmgateway import GatewayService, GatewayRequest, TaskComplexity
 
 async def run_gateway_call():
     # Load environment variables

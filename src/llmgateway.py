@@ -7,15 +7,22 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import List, Dict, Optional
 from pydantic import BaseModel
+import os
+os.environ["LITELLM_LOG"] = "ERROR"
+os.environ["SUPPRESS_LITELLM_LOGS"] = "True"
+
 import litellm
+litellm.suppress_debug_info = True
+
 from filelock import FileLock
+import logging
 
 # Suppress Pydantic serializer warnings commonly raised by LiteLLM response parsing
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
 
-CONFIG_FILE = "models_config.json"
-LIMITS_FILE = "rate_limits.json"
-LIMITS_LOCK = "rate_limits.json.lock"
+CONFIG_FILE = "config/models_config.json"
+LIMITS_FILE = "config/rate_limits.json"
+LIMITS_LOCK = "config/rate_limits.json.lock"
 
 
 
@@ -35,6 +42,7 @@ class GatewayRequest(BaseModel):
     task_complexity: TaskComplexity
     forced_model: Optional[str] = None
     max_tokens: Optional[int] = None
+    response_format: Optional[dict] = None
 
 class ModelConfig(BaseModel):
     model_name: str
@@ -173,13 +181,17 @@ class GatewayService:
             # litellm will automatically pick up the env var specified, but we could also inject it if needed
             # e.g., os.environ.get(config.env_key_name)
             
-            response = await litellm.acompletion(
-                model=config.model_name,
-                messages=[{"role": "user", "content": request.prompt}],
-                max_tokens=request.max_tokens,
-                api_key=os.environ.get(config.env_key_name),
-                api_base=config.base_url
-            )
+            completion_kwargs = {
+                "model": config.model_name,
+                "messages": [{"role": "user", "content": request.prompt}],
+                "max_tokens": request.max_tokens,
+                "api_key": os.environ.get(config.env_key_name),
+                "api_base": config.base_url
+            }
+            if request.response_format:
+                completion_kwargs["response_format"] = {"type": "json_schema", "json_schema": {"name": "response", "schema": request.response_format, "strict": True}}
+
+            response = await litellm.acompletion(**completion_kwargs)
             return response.choices[0].message.content
             
         except Exception as e:
